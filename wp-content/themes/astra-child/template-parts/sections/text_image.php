@@ -15,9 +15,8 @@ $faqs = get_field('faqs');
     <div class="content">
         <h2><?php echo $title; ?></h2>
         <?php echo $description; ?>
-        <?php echo $editor_right; ?>
         <h6>Location : <?php echo $location; ?></h6>
-        <h6>Link: <?php echo $link; ?></ h6>
+        <h6><?php echo $link; ?></ h6>
             <div class="image">
                 <?php if ($image): ?>
                     <img src="<?php echo $image['url']; ?>" alt="">
@@ -46,3 +45,4 @@ $faqs = get_field('faqs');
         </div>
     <?php endif; ?>
 </div>
+
