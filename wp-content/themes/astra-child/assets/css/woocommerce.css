@@ -1,0 +1,85 @@
+/* Product Page */
+.single-product .product_title {
+  font-size: 40px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.product {
+  border: black solid 1px;
+  border-radius: 10px;
+  transition: 0.3s;
+  padding: 20px;
+}
+
+ul .products {
+  padding: 20px;
+}
+
+.single-product .price {
+  color: #2563eb;
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.astra-shop-thumbnail-wrap {
+  object-fit: cover;
+}
+
+/* Product image */
+.single-product img {
+  border-radius: 20px;
+  transition: 0.3s;
+}
+
+.single-product img:hover {
+  transform: scale(1.03);
+}
+
+/* Add to Cart Button */
+.single_add_to_cart_button {
+  background: black !important;
+  color: white !important;
+  padding: 14px 28px !important;
+  border-radius: 8px !important;
+}
+
+.products li.product {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.woocommerce ul.products li.product img {
+  height: 250px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.woocommerce ul.products li.product {
+  transition: 0.3s;
+  padding: 5px;
+  text-align: center;
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.woocommerce ul.products li.product:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.woocommerce span.onsale {
+  border-radius: 20px;
+  padding: 5px 12px;
+}
+
+.woocommerce ul.products li.product .button {
+  width: 100%;
+  text-align: center;
+}
+
+
+

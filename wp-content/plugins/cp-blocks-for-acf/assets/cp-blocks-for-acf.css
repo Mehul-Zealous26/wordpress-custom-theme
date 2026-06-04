@@ -1,0 +1,66 @@
+/* styles for new "copy" action icon */
+.acf-icon.-copy::before, .acf-more-layout-actions li a::before {
+    content: '\f105';
+    font-size: 0.9em;
+}
+.acf-icon.acf-copy-icon::before {
+    font-family: dashicons;
+}
+.acf-flexible-content .layout .acf-fc-layout-controls .acf-icon.-copy {
+    visibility: hidden;
+}
+.acf-flexible-content .layout:hover .acf-fc-layout-controls .acf-icon.-copy,
+.acf-flexible-content .layout.-hover .acf-fc-layout-controls .acf-icon.-copy {
+    visibility: visible;
+}
+.acf-icon.-copy-all {
+    visibility: hidden;
+}
+.acf-postbox .handle-actions:hover .-copy-all {
+    visibility: visible;
+}
+
+/* popup styles */
+.cpblocksforacf-popup {
+    text-align: left;
+    margin-left: -25px;
+    left: 3em;
+    bottom: -28px;
+}
+.cpblocksforacf-new-layout {
+    box-shadow: 0 0 24px 0px #aca;
+}
+.cpblocksforacf-new-layout .acf-fc-title {
+    color: #464;
+}
+.acf-actions a.cpblocksforacf-action-menu-button {
+    position:absolute;
+    left:0;
+    padding:0 5px;
+    border: 1px solid #ccc;
+}
+.cpblocksforacf-action-menu-div {
+    vertical-align:text-top;
+    width:auto;
+    height:auto;
+    font-size:13px;
+    line-height:20px;
+}
+
+/* for block themes */
+body.block-editor-page .cpblocksforacf-popup {
+    bottom: -16px;
+}
+body.block-editor-page .cpblocksforacf-popup a {
+    width: initial !important;
+}
+
+/* for ACF 6.5 */
+.acf-more-layout-actions li a[data-action=copy-layout]::before {
+    content: '\f105' !important;
+    font-family: dashicons;
+    font-size: 18px;
+    line-height: 1em;
+    background: transparent !important;
+    margin: -2px 7px 0 -2px !important;
+}

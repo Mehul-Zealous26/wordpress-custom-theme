@@ -1,0 +1,233 @@
+2026-05-29T07:09:26+00:00 DEBUG #9837 - [New Request] GET /wordpress/wp-admin/admin.php
+2026-05-29T07:09:26+00:00 DEBUG #9837 - GET https://api.woocommerce.com/integrations/ppc/v1/customer/partners/K8SKZ36LQBWXJ/merchant-integrations/
+Response: Array
+(
+    [code] => 404
+    [message] => Not Found
+)
+
+Response Body: {"statusCode":404,"error":"Not Found","message":"Not Found"}
+
+2026-05-29T07:09:26+00:00 WARNING #9837 - [Error] Not Found CONTEXT: {"args":{"method":"GET","headers":{"Authorization":"Bearer token","Content-Type":"application/json"}},"response":{"headers":{},"body":"{"statusCode":404,"error":"Not Found","message":"Not Found"}","response":{"code":404,"message":"Not Found"},"cookies":[],"filename":null,"http_response":{"data":null,"headers":null,"status":null}}}
+2026-05-29T07:09:27+00:00 DEBUG #9837 - GET https://api.woocommerce.com/integrations/ppc/v1/customer/partners/K8SKZ36LQBWXJ/merchant-integrations/
+Response: Array
+(
+    [code] => 404
+    [message] => Not Found
+)
+
+Response Body: {"statusCode":404,"error":"Not Found","message":"Not Found"}
+
+2026-05-29T07:09:27+00:00 WARNING #9837 - [Error] Not Found CONTEXT: {"args":{"method":"GET","headers":{"Authorization":"Bearer token","Content-Type":"application/json"}},"response":{"headers":{},"body":"{"statusCode":404,"error":"Not Found","message":"Not Found"}","response":{"code":404,"message":"Not Found"},"cookies":[],"filename":null,"http_response":{"data":null,"headers":null,"status":null}}}
+2026-05-29T07:12:17+00:00 DEBUG #2665 - [New Request] GET /wordpress/wp-admin/admin.php
+2026-05-29T07:12:17+00:00 DEBUG #2665 - GET https://api.woocommerce.com/integrations/ppc/v1/customer/partners/K8SKZ36LQBWXJ/merchant-integrations/
+Response: Array
+(
+    [code] => 404
+    [message] => Not Found
+)
+
+Response Body: {"statusCode":404,"error":"Not Found","message":"Not Found"}
+
+2026-05-29T07:12:17+00:00 WARNING #2665 - [Error] Not Found CONTEXT: {"args":{"method":"GET","headers":{"Authorization":"Bearer token","Content-Type":"application/json"}},"response":{"headers":{},"body":"{"statusCode":404,"error":"Not Found","message":"Not Found"}","response":{"code":404,"message":"Not Found"},"cookies":[],"filename":null,"http_response":{"data":null,"headers":null,"status":null}}}
+2026-05-29T07:12:18+00:00 DEBUG #2665 - GET https://api.woocommerce.com/integrations/ppc/v1/customer/partners/K8SKZ36LQBWXJ/merchant-integrations/
+Response: Array
+(
+    [code] => 404
+    [message] => Not Found
+)
+
+Response Body: {"statusCode":404,"error":"Not Found","message":"Not Found"}
+
+2026-05-29T07:12:18+00:00 WARNING #2665 - [Error] Not Found CONTEXT: {"args":{"method":"GET","headers":{"Authorization":"Bearer token","Content-Type":"application/json"}},"response":{"headers":{},"body":"{"statusCode":404,"error":"Not Found","message":"Not Found"}","response":{"code":404,"message":"Not Found"},"cookies":[],"filename":null,"http_response":{"data":null,"headers":null,"status":null}}}
+2026-05-29T07:17:15+00:00 DEBUG #6468 - [New Request] POST /wordpress/wp-admin/admin.php
+2026-05-29T07:17:15+00:00 DEBUG #6468 - Skipping reCAPTCHA meta addition: No customer identifier available CONTEXT: {"order_id":205,"backtrace":[{"file":"C:\wamp64\www\wordpress\wp-content\plugins\woocommerce-paypal-payments\modules\woocommerce-logging\src\Logger\WooCommerceLogger.php","line":85,"function":"log","class":"WC_Logger","type":"->"},{"file":"C:\wamp64\www\wordpress\wp-content\plugins\woocommerce-paypal-payments\vendor\psr\log\Psr\Log\LoggerTrait.php","line":120,"function":"log","class":"WooCommerce\WooCommerce\Logging\Logger\WooCommerceLogger","type":"->"},{"file":"C:\wamp64\www\wordpress\wp-content\plugins\woocommerce-paypal-payments\modules\ppcp-fraud-protection\src\Recaptcha\Recaptcha.php","line":199,"function":"debug","class":"WooCommerce\WooCommerce\Logging\Logger\WooCommerceLogger","type":"->"},{"file":"C:\wamp64\www\wordpress\wp-content\plugins\woocommerce-paypal-payments\modules\ppcp-fraud-protection\src\FraudProtectionModule.php","line":120,"function":"add_result_meta","class":"WooCommerce\PayPalCommerce\FraudProtection\Recaptcha\Recaptcha","type":"->"},{"file":"C:\wamp64\www\wordpress\wp-includes\class-wp-hook.php","line":341,"function":"WooCommerce\PayPalCommerce\FraudProtection\{closure}","class":"WooCommerce\PayPalCommerce\FraudProtection\FraudProtectionModule","type":"::"},{"file":"C:\wamp64\www\wordpress\wp-includes\class-wp-hook.php","line":365,"function":"apply_filters","class":"WP_Hook","type":"->"},{"file":"C:\wamp64\www\wordpress\wp-includes\plugin.php","line":522,"function":"do_action","class":"WP_Hook","type":"->"},{"file":"C:\wamp64\www\wordpress\wp-content\plugins\woocommerce\src\Internal\DataStores\Orders\OrdersTableDataStore.php","line":2948,"function":"do_action"},{"file":"C:\wamp64\www\wordpress\wp-content\plugins\woocommerce\includes\class-wc-data-store.php","line":196,"function":"update","class":"Automattic\WooCommerce\Internal\DataStores\Orders\OrdersTableDataStore","type":"->"},{"file":"C:\wamp64\www\wordpress\wp-content\plugins\woocommerce\includes\abstracts\abstract-wc-order.php","line":224,"function":"update","class":"WC_Data_Store","type":"->"},{"file":"C:\wamp64\www\wordpress\wp-content\plugins\woocommerce\includes\class-wc-order.php","line":284,"function":"save","class":"WC_Abstract_Order","type":"->"},{"file":"C:\wamp64\www\wordpress\wp-content\plugins\woocommerce\includes\admin\meta-boxes\class-wc-meta-box-order-data.php","line":828,"function":"save","class":"WC_Order","type":"->"},{"file":"C:\wamp64\www\wordpress\wp-includes\class-wp-hook.php","line":343,"function":"save","class":"WC_Meta_Box_Order_Data","type":"::"},{"file":"C:\wamp64\www\wordpress\wp-includes\class-wp-hook.php","line":365,"function":"apply_filters","class":"WP_Hook","type":"->"},{"file":"C:\wamp64\www\wordpress\wp-includes\plugin.php","line":522,"function":"do_action","class":"WP_Hook","type":"->"},{"file":"C:\wamp64\www\wordpress\wp-content\plugins\woocommerce\src\Internal\Admin\Orders\Edit.php","line":318,"function":"do_action"},{"file":"C:\wamp64\www\wordpress\wp-content\plugins\woocommerce\src\Internal\Admin\Orders\Edit.php","line":153,"function":"handle_order_update","class":"Automattic\WooCommerce\Internal\Admin\Orders\Edit","type":"->"},{"file":"C:\wamp64\www\wordpress\wp-content\plugins\woocommerce\src\Internal\Admin\Orders\PageController.php","line":352,"function":"setup","class":"Automattic\WooCommerce\Internal\Admin\Orders\Edit","type":"->"},{"file":"C:\wamp64\www\wordpress\wp-content\plugins\woocommerce\src\Internal\Admin\Orders\PageController.php","line":368,"function":"prepare_order_edit_form","class":"Automattic\WooCommerce\Internal\Admin\Orders\PageController","type":"->"},{"file":"C:\wamp64\www\wordpress\wp-content\plugins\woocommerce\src\Internal\Admin\Orders\PageController.php","line":167,"function":"setup_action_edit_order","class":"Automattic\WooCommerce\Internal\Admin\Orders\PageController","type":"->"},{"file":"C:\wamp64\www\wordpress\wp-includes\class-wp-hook.php","line":341,"function":"handle_load_page_action","class":"Automattic\WooCommerce\Internal\Admin\Orders\PageController","type":"->"},{"file":"C:\wamp64\www\wordpress\wp-includes\class-wp-hook.php","line":365,"function":"apply_filters","class":"WP_Hook","type":"->"},{"file":"C:\wamp64\www\wordpress\wp-includes\plugin.php","line":522,"function":"do_action","class":"WP_Hook","type":"->"},{"file":"C:\wamp64\www\wordpress\wp-admin\admin.php","line":242,"function":"do_action"}]}
+2026-05-29T07:19:18+00:00 DEBUG #5618 - [New Request] GET /wordpress/wp-admin/admin.php
+2026-05-29T07:19:18+00:00 DEBUG #5618 - GET https://api.woocommerce.com/integrations/ppc/v1/customer/partners/K8SKZ36LQBWXJ/merchant-integrations/
+Response: Array
+(
+    [code] => 404
+    [message] => Not Found
+)
+
+Response Body: {"statusCode":404,"error":"Not Found","message":"Not Found"}
+
+2026-05-29T07:19:18+00:00 WARNING #5618 - [Error] Not Found CONTEXT: {"args":{"method":"GET","headers":{"Authorization":"Bearer token","Content-Type":"application/json"}},"response":{"headers":{},"body":"{"statusCode":404,"error":"Not Found","message":"Not Found"}","response":{"code":404,"message":"Not Found"},"cookies":[],"filename":null,"http_response":{"data":null,"headers":null,"status":null}}}
+2026-05-29T07:19:19+00:00 DEBUG #5618 - GET https://api.woocommerce.com/integrations/ppc/v1/customer/partners/K8SKZ36LQBWXJ/merchant-integrations/
+Response: Array
+(
+    [code] => 404
+    [message] => Not Found
+)
+
+Response Body: {"statusCode":404,"error":"Not Found","message":"Not Found"}
+
+2026-05-29T07:19:19+00:00 WARNING #5618 - [Error] Not Found CONTEXT: {"args":{"method":"GET","headers":{"Authorization":"Bearer token","Content-Type":"application/json"}},"response":{"headers":{},"body":"{"statusCode":404,"error":"Not Found","message":"Not Found"}","response":{"code":404,"message":"Not Found"},"cookies":[],"filename":null,"http_response":{"data":null,"headers":null,"status":null}}}
+2026-05-29T07:20:02+00:00 DEBUG #3699 - [New Request] GET /wordpress/wp-admin/admin.php
+2026-05-29T07:20:02+00:00 DEBUG #3699 - GET https://api.woocommerce.com/integrations/ppc/v1/customer/partners/K8SKZ36LQBWXJ/merchant-integrations/
+Response: Array
+(
+    [code] => 404
+    [message] => Not Found
+)
+
+Response Body: {"statusCode":404,"error":"Not Found","message":"Not Found"}
+
+2026-05-29T07:20:02+00:00 WARNING #3699 - [Error] Not Found CONTEXT: {"args":{"method":"GET","headers":{"Authorization":"Bearer token","Content-Type":"application/json"}},"response":{"headers":{},"body":"{"statusCode":404,"error":"Not Found","message":"Not Found"}","response":{"code":404,"message":"Not Found"},"cookies":[],"filename":null,"http_response":{"data":null,"headers":null,"status":null}}}
+2026-05-29T07:20:03+00:00 DEBUG #3699 - GET https://api.woocommerce.com/integrations/ppc/v1/customer/partners/K8SKZ36LQBWXJ/merchant-integrations/
+Response: Array
+(
+    [code] => 404
+    [message] => Not Found
+)
+
+Response Body: {"statusCode":404,"error":"Not Found","message":"Not Found"}
+
+2026-05-29T07:20:03+00:00 WARNING #3699 - [Error] Not Found CONTEXT: {"args":{"method":"GET","headers":{"Authorization":"Bearer token","Content-Type":"application/json"}},"response":{"headers":{},"body":"{"statusCode":404,"error":"Not Found","message":"Not Found"}","response":{"code":404,"message":"Not Found"},"cookies":[],"filename":null,"http_response":{"data":null,"headers":null,"status":null}}}
+2026-05-29T08:41:29+00:00 DEBUG #7839 - [New Request] GET /wordpress/wp-admin/admin.php
+2026-05-29T08:41:29+00:00 DEBUG #7839 - GET https://api.woocommerce.com/integrations/ppc/v1/customer/partners/K8SKZ36LQBWXJ/merchant-integrations/
+Response: Array
+(
+    [code] => 404
+    [message] => Not Found
+)
+
+Response Body: {"statusCode":404,"error":"Not Found","message":"Not Found"}
+
+2026-05-29T08:41:29+00:00 WARNING #7839 - [Error] Not Found CONTEXT: {"args":{"method":"GET","headers":{"Authorization":"Bearer token","Content-Type":"application/json"}},"response":{"headers":{},"body":"{"statusCode":404,"error":"Not Found","message":"Not Found"}","response":{"code":404,"message":"Not Found"},"cookies":[],"filename":null,"http_response":{"data":null,"headers":null,"status":null}}}
+2026-05-29T08:41:30+00:00 DEBUG #7839 - GET https://api.woocommerce.com/integrations/ppc/v1/customer/partners/K8SKZ36LQBWXJ/merchant-integrations/
+Response: Array
+(
+    [code] => 404
+    [message] => Not Found
+)
+
+Response Body: {"statusCode":404,"error":"Not Found","message":"Not Found"}
+
+2026-05-29T08:41:30+00:00 WARNING #7839 - [Error] Not Found CONTEXT: {"args":{"method":"GET","headers":{"Authorization":"Bearer token","Content-Type":"application/json"}},"response":{"headers":{},"body":"{"statusCode":404,"error":"Not Found","message":"Not Found"}","response":{"code":404,"message":"Not Found"},"cookies":[],"filename":null,"http_response":{"data":null,"headers":null,"status":null}}}
+2026-05-29T08:56:56+00:00 DEBUG #4791 - [New Request] GET /wordpress/wp-admin/admin.php
+2026-05-29T08:56:56+00:00 DEBUG #4791 - GET https://api.woocommerce.com/integrations/ppc/v1/customer/partners/K8SKZ36LQBWXJ/merchant-integrations/
+Response: Array
+(
+    [code] => 404
+    [message] => Not Found
+)
+
+Response Body: {"statusCode":404,"error":"Not Found","message":"Not Found"}
+
+2026-05-29T08:56:56+00:00 WARNING #4791 - [Error] Not Found CONTEXT: {"args":{"method":"GET","headers":{"Authorization":"Bearer token","Content-Type":"application/json"}},"response":{"headers":{},"body":"{"statusCode":404,"error":"Not Found","message":"Not Found"}","response":{"code":404,"message":"Not Found"},"cookies":[],"filename":null,"http_response":{"data":null,"headers":null,"status":null}}}
+2026-05-29T08:56:56+00:00 DEBUG #2900 - [New Request] GET /wordpress/wp-admin/admin.php
+2026-05-29T08:56:56+00:00 DEBUG #2900 - GET https://api.woocommerce.com/integrations/ppc/v1/customer/partners/K8SKZ36LQBWXJ/merchant-integrations/
+Response: Array
+(
+    [code] => 404
+    [message] => Not Found
+)
+
+Response Body: {"statusCode":404,"error":"Not Found","message":"Not Found"}
+
+2026-05-29T08:56:56+00:00 WARNING #2900 - [Error] Not Found CONTEXT: {"args":{"method":"GET","headers":{"Authorization":"Bearer token","Content-Type":"application/json"}},"response":{"headers":{},"body":"{"statusCode":404,"error":"Not Found","message":"Not Found"}","response":{"code":404,"message":"Not Found"},"cookies":[],"filename":null,"http_response":{"data":null,"headers":null,"status":null}}}
+2026-05-29T08:56:56+00:00 DEBUG #4791 - GET https://api.woocommerce.com/integrations/ppc/v1/customer/partners/K8SKZ36LQBWXJ/merchant-integrations/
+Response: Array
+(
+    [code] => 404
+    [message] => Not Found
+)
+
+Response Body: {"statusCode":404,"error":"Not Found","message":"Not Found"}
+
+2026-05-29T08:56:56+00:00 WARNING #4791 - [Error] Not Found CONTEXT: {"args":{"method":"GET","headers":{"Authorization":"Bearer token","Content-Type":"application/json"}},"response":{"headers":{},"body":"{"statusCode":404,"error":"Not Found","message":"Not Found"}","response":{"code":404,"message":"Not Found"},"cookies":[],"filename":null,"http_response":{"data":null,"headers":null,"status":null}}}
+2026-05-29T08:56:56+00:00 DEBUG #2900 - GET https://api.woocommerce.com/integrations/ppc/v1/customer/partners/K8SKZ36LQBWXJ/merchant-integrations/
+Response: Array
+(
+    [code] => 404
+    [message] => Not Found
+)
+
+Response Body: {"statusCode":404,"error":"Not Found","message":"Not Found"}
+
+2026-05-29T08:56:56+00:00 WARNING #2900 - [Error] Not Found CONTEXT: {"args":{"method":"GET","headers":{"Authorization":"Bearer token","Content-Type":"application/json"}},"response":{"headers":{},"body":"{"statusCode":404,"error":"Not Found","message":"Not Found"}","response":{"code":404,"message":"Not Found"},"cookies":[],"filename":null,"http_response":{"data":null,"headers":null,"status":null}}}
+2026-05-29T09:02:04+00:00 DEBUG #7218 - [New Request] GET /wordpress/wp-admin/admin.php
+2026-05-29T09:02:04+00:00 DEBUG #7218 - GET https://api.woocommerce.com/integrations/ppc/v1/customer/partners/K8SKZ36LQBWXJ/merchant-integrations/
+Response: Array
+(
+    [code] => 404
+    [message] => Not Found
+)
+
+Response Body: {"statusCode":404,"error":"Not Found","message":"Not Found"}
+
+2026-05-29T09:02:04+00:00 WARNING #7218 - [Error] Not Found CONTEXT: {"args":{"method":"GET","headers":{"Authorization":"Bearer token","Content-Type":"application/json"}},"response":{"headers":{},"body":"{"statusCode":404,"error":"Not Found","message":"Not Found"}","response":{"code":404,"message":"Not Found"},"cookies":[],"filename":null,"http_response":{"data":null,"headers":null,"status":null}}}
+2026-05-29T09:02:05+00:00 DEBUG #7218 - GET https://api.woocommerce.com/integrations/ppc/v1/customer/partners/K8SKZ36LQBWXJ/merchant-integrations/
+Response: Array
+(
+    [code] => 404
+    [message] => Not Found
+)
+
+Response Body: {"statusCode":404,"error":"Not Found","message":"Not Found"}
+
+2026-05-29T09:02:05+00:00 WARNING #7218 - [Error] Not Found CONTEXT: {"args":{"method":"GET","headers":{"Authorization":"Bearer token","Content-Type":"application/json"}},"response":{"headers":{},"body":"{"statusCode":404,"error":"Not Found","message":"Not Found"}","response":{"code":404,"message":"Not Found"},"cookies":[],"filename":null,"http_response":{"data":null,"headers":null,"status":null}}}
+2026-05-29T09:03:48+00:00 DEBUG #5657 - [New Request] GET /wordpress/wp-admin/admin.php
+2026-05-29T09:03:48+00:00 DEBUG #5657 - GET https://api.woocommerce.com/integrations/ppc/v1/customer/partners/K8SKZ36LQBWXJ/merchant-integrations/
+Response: Array
+(
+    [code] => 404
+    [message] => Not Found
+)
+
+Response Body: {"statusCode":404,"error":"Not Found","message":"Not Found"}
+
+2026-05-29T09:03:48+00:00 WARNING #5657 - [Error] Not Found CONTEXT: {"args":{"method":"GET","headers":{"Authorization":"Bearer token","Content-Type":"application/json"}},"response":{"headers":{},"body":"{"statusCode":404,"error":"Not Found","message":"Not Found"}","response":{"code":404,"message":"Not Found"},"cookies":[],"filename":null,"http_response":{"data":null,"headers":null,"status":null}}}
+2026-05-29T09:03:49+00:00 DEBUG #5657 - GET https://api.woocommerce.com/integrations/ppc/v1/customer/partners/K8SKZ36LQBWXJ/merchant-integrations/
+Response: Array
+(
+    [code] => 404
+    [message] => Not Found
+)
+
+Response Body: {"statusCode":404,"error":"Not Found","message":"Not Found"}
+
+2026-05-29T09:03:49+00:00 WARNING #5657 - [Error] Not Found CONTEXT: {"args":{"method":"GET","headers":{"Authorization":"Bearer token","Content-Type":"application/json"}},"response":{"headers":{},"body":"{"statusCode":404,"error":"Not Found","message":"Not Found"}","response":{"code":404,"message":"Not Found"},"cookies":[],"filename":null,"http_response":{"data":null,"headers":null,"status":null}}}
+2026-05-29T13:14:01+00:00 DEBUG #4080 - [New Request] GET /wordpress/wp-admin/admin.php
+2026-05-29T13:14:01+00:00 DEBUG #4080 - GET https://api.woocommerce.com/integrations/ppc/v1/customer/partners/K8SKZ36LQBWXJ/merchant-integrations/
+Response: Array
+(
+    [code] => 404
+    [message] => Not Found
+)
+
+Response Body: {"statusCode":404,"error":"Not Found","message":"Not Found"}
+
+2026-05-29T13:14:01+00:00 DEBUG #4353 - [New Request] GET /wordpress/wp-admin/admin.php
+2026-05-29T13:14:01+00:00 DEBUG #4353 - GET https://api.woocommerce.com/integrations/ppc/v1/customer/partners/K8SKZ36LQBWXJ/merchant-integrations/
+Response: Array
+(
+    [code] => 404
+    [message] => Not Found
+)
+
+Response Body: {"statusCode":404,"error":"Not Found","message":"Not Found"}
+
+2026-05-29T13:14:01+00:00 WARNING #4080 - [Error] Not Found CONTEXT: {"args":{"method":"GET","headers":{"Authorization":"Bearer token","Content-Type":"application/json"}},"response":{"headers":{},"body":"{"statusCode":404,"error":"Not Found","message":"Not Found"}","response":{"code":404,"message":"Not Found"},"cookies":[],"filename":null,"http_response":{"data":null,"headers":null,"status":null}}}
+2026-05-29T13:14:01+00:00 WARNING #4353 - [Error] Not Found CONTEXT: {"args":{"method":"GET","headers":{"Authorization":"Bearer token","Content-Type":"application/json"}},"response":{"headers":{},"body":"{"statusCode":404,"error":"Not Found","message":"Not Found"}","response":{"code":404,"message":"Not Found"},"cookies":[],"filename":null,"http_response":{"data":null,"headers":null,"status":null}}}
+2026-05-29T13:14:02+00:00 DEBUG #4353 - GET https://api.woocommerce.com/integrations/ppc/v1/customer/partners/K8SKZ36LQBWXJ/merchant-integrations/
+Response: Array
+(
+    [code] => 404
+    [message] => Not Found
+)
+
+Response Body: {"statusCode":404,"error":"Not Found","message":"Not Found"}
+
+2026-05-29T13:14:02+00:00 DEBUG #4080 - GET https://api.woocommerce.com/integrations/ppc/v1/customer/partners/K8SKZ36LQBWXJ/merchant-integrations/
+Response: Array
+(
+    [code] => 404
+    [message] => Not Found
+)
+
+Response Body: {"statusCode":404,"error":"Not Found","message":"Not Found"}
+
+2026-05-29T13:14:02+00:00 WARNING #4353 - [Error] Not Found CONTEXT: {"args":{"method":"GET","headers":{"Authorization":"Bearer token","Content-Type":"application/json"}},"response":{"headers":{},"body":"{"statusCode":404,"error":"Not Found","message":"Not Found"}","response":{"code":404,"message":"Not Found"},"cookies":[],"filename":null,"http_response":{"data":null,"headers":null,"status":null}}}
+2026-05-29T13:14:02+00:00 WARNING #4080 - [Error] Not Found CONTEXT: {"args":{"method":"GET","headers":{"Authorization":"Bearer token","Content-Type":"application/json"}},"response":{"headers":{},"body":"{"statusCode":404,"error":"Not Found","message":"Not Found"}","response":{"code":404,"message":"Not Found"},"cookies":[],"filename":null,"http_response":{"data":null,"headers":null,"status":null}}}
