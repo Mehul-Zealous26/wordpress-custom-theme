@@ -255,11 +255,11 @@ function show_product_gallery()
     $gallery = get_field('product_gallery');
     echo '<h4>Gallery</h4>';
     if ($gallery) {
-    
+
         echo '<div class="product-gallery">';
 
         foreach ($gallery as $image) {
-            
+
             echo '<img src="' . $image['url'] . '" alt="' . $image['alt'] . '">';
         }
         echo '</div>';
@@ -270,10 +270,197 @@ add_action('woocommerce_single_product_summary', 'show_product_gallery', 25);
 
 if (function_exists('acf_add_options_page')) {
     acf_add_options_page(array(
-        'page_title'=> 'Theme Settings',
-        'menu_title'=> 'Theme Settings',
-        'menu_slug'=> 'theme-settings',
-        'capability'=> 'edit_posts',
+        'page_title' => 'Theme Settings',
+        'menu_title' => 'Theme Settings',
+        'menu_slug' => 'theme-settings',
+        'capability' => 'edit_posts',
         'redirect' => 'false'
     ));
+}
+
+add_action('wp_ajax_filter_products', 'filter_products_callback');
+add_action('wp_ajax_nopriv_filter_products', 'filter_products_callback');
+
+function filter_products_callback()
+{
+    $category = isset($_POST['category']) ? $_POST['category'] : '';
+    $color = isset($_POST['color']) ? $_POST['color'] : '';
+    $size = isset($_POST['size']) ? $_POST['size'] : '';
+    $brand = isset($_POST['brand']) ? $_POST['brand'] : '';
+    $min_price = isset($_POST['minPrice']) ? $_POST['minPrice'] : 0;
+    $max_price = isset($_POST['maxPrice']) ? $_POST['maxPrice'] : 100000;
+
+    $args = array(
+        'post_type' => 'product',
+        'posts_per_page' => -1,
+        'tax_query' => array(),
+        'meta_query' => array(),
+    );
+
+    $active_taxonomies = [$category, $color, $size, $brand];
+    if (count($active_taxonomies) > 1) {
+        $args['tax_query']['relation'] = 'AND';
+    }
+
+    if (!empty($category)) {
+        $args['tax_query'][] = array(
+            'taxonomy' => 'product_cat',
+            'field' => 'slug',
+            'terms' => $category,
+        );
+    }
+
+    if (!empty($color)) {
+        $args['tax_query'][] = array(
+            'taxonomy' => 'pa_color',
+            'field' => 'slug',
+            'terms' => $color,
+        );
+    }
+
+    if (!empty($size)) {
+        $args['tax_query'][] = array(
+            'taxonomy' => 'pa_size',
+            'field' => 'slug',
+            'terms' => $size,
+        );
+    }
+
+    if (!empty($brand)) {
+        $args['tax_query'][] = array(
+            'taxonomy' => 'product_brand',
+            'field' => 'slug',
+            'terms' => $brand,
+        );
+    }
+
+    if (isset($min_price) || isset($max_price)) {
+        $args['meta_query'][] = array(
+        'key' => '_price',
+        'value' => array($min_price, $max_price),
+        'compare' => 'BETWEEN',
+        'type' => 'NUMERIC',
+    );
+    }
+
+    $query = new WP_Query(($args));
+
+    if ($query->have_posts()) {
+        while ($query->have_posts()) {
+            $query->the_post();
+            wc_get_template_part('content', 'product');
+        }
+    } else {
+        echo '<p>No Products Found</p>';
+    }
+
+    wp_reset_postdata();
+    wp_die();
+}
+
+add_action('wp_enqueue_scripts', 'custom_filter_scripts');
+function custom_filter_scripts()
+{
+    wp_enqueue_script(
+        'product-filter',
+        get_stylesheet_directory_uri() . '/assets/js/script.js',
+        array('jquery'), // tell to load first jquery
+        null,
+        true
+    );
+
+    wp_localize_script(
+        'product-filter',
+        'filter_ajax',
+        array(
+            'ajax_url' => admin_url('admin-ajax.php')
+        )
+    );
+}
+
+add_action('woocommerce_before_shop_loop', 'filter_dropdown', 5); //hook is load filter Dropdown before Product loop
+function filter_dropdown()
+{
+    if (is_shop()) {
+        $categories = get_terms(array('taxonomy' => 'product_cat'));
+        $color = get_terms(array('taxonomy' => 'pa_color'));
+        $size = get_terms(array('taxonomy' => 'pa_size'));
+        $brand = get_terms(array('taxonomy' => 'product_brand'));
+
+        echo '<div style="margin-bottom: 30px;">';
+        echo '<label for="category-filter">Filter by Category: </label>';
+        echo '<select id="category-filter">';
+        echo '<option value="">All Products</option>';
+        if (!empty($categories)) {
+            foreach ($categories as $category) {
+                echo '<option value = "' . $category->slug . '">' . $category->name . '</option>';
+            }
+        }
+        echo '</select>';
+        echo '</div>';
+
+        echo '<div style="margin-bottom: 30px;">';
+        echo '<label for="color-filter">Filter by color: </label>';
+        echo '<select id="color-filter">';
+        echo '<option value="">All Colors</option>';
+        if (!empty($color)) {
+            foreach ($color as $colors) {
+                echo '<option value = "' . $colors->slug . '">' . $colors->name . '</option>';
+            }
+        }
+        echo '</select>';
+        echo '</div>';
+
+        echo '<div style="margin-bottom: 30px;">';
+        echo '<label for="size-filter">Filter by size: </label>';
+        echo '<select id="size-filter">';
+        echo '<option value="">All Sizes</option>';
+        if (!empty($size)) {
+            foreach ($size as $sizes) {
+                echo '<option value = "' . $sizes->slug . '">' . $sizes->name . '</option>';
+            }
+        }
+        echo '</select>';
+        echo '</div>';
+
+        echo '<div style="margin-bottom: 30px;">';
+        echo '<label for="brand-filter">Filter by Brand: </label>';
+        echo '<select id="brand-filter">';
+        echo '<option value="">All Brands</option>';
+        if (!empty($brand)) {
+            foreach ($brand as $brands) {
+                echo '<option value = "' . $brands->slug . '">' . $brands->name . '</option>';
+            }
+        }
+        echo '</select>';
+        echo '</div>';
+
+        echo '<div class="price-filter-box" style="margin-bottom: 30px; display: flex; align-items: flex-end; gap: 10px;">';
+        echo '<div>';
+        echo '<label for="min-price" style="display:block;">Min Price ($):</label>';
+        echo '  <input type="number" id="min-price" value="0" min="0" style="width: 80px; padding: 5px;">';
+        echo '</div>';
+        echo '<div>';
+        echo '<label for="max-price" style="display:block;">Max Price ($):</label>';
+        echo '      <input type="number" id="max-price" value="1000" min="0" style="width: 80px; padding: 5px;">';
+        echo '</div>';
+        echo '  <button type="button" id="price-filter" style="padding: 6px 12px; background: #000; color: #fff; border: none; cursor: pointer;">Filter Price</button>';
+        echo '</div>';
+    }
+}
+
+add_action('woocommerce_before_shop_loop', 'ajax_container_open', 12);
+function ajax_container_open()
+{
+    if (is_shop()) {
+        echo '<div id="products-container" class="products columns-5 ">';
+    }
+}
+
+add_action('woocommerce_after_shop_loop', 'ajax_container_close', 5);
+function ajax_container_close()
+{
+    if (is_shop()) {
+        echo '</div>';
+    }
 }
