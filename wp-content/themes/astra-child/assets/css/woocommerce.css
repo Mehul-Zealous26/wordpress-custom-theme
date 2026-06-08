@@ -81,5 +81,7 @@ ul .products {
   text-align: center;
 }
 
-
-
+#size-wrapper,
+#color-wrapper{
+  display: none;
+}

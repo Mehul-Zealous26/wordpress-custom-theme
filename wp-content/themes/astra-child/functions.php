@@ -135,7 +135,7 @@ function custom_product_image_field()
             <label>Upload Your Image</label><br>
             <input type="file" name="custom_product_image">
         </p>
-<?php
+        <?php
     }
 }
 
@@ -283,12 +283,13 @@ add_action('wp_ajax_nopriv_filter_products', 'filter_products_callback');
 
 function filter_products_callback()
 {
-    $category = isset($_POST['category']) ? $_POST['category'] : '';
-    $color = isset($_POST['color']) ? $_POST['color'] : '';
-    $size = isset($_POST['size']) ? $_POST['size'] : '';
-    $brand = isset($_POST['brand']) ? $_POST['brand'] : '';
-    $min_price = isset($_POST['minPrice']) ? $_POST['minPrice'] : 0;
-    $max_price = isset($_POST['maxPrice']) ? $_POST['maxPrice'] : 100000;
+    $categories = $_POST['categories'] ?? [];
+    $subcategories = $_POST['subcategories'] ?? [];
+    $colors = $_POST['colors'] ?? [];
+    $sizes = $_POST['sizes'] ?? [];
+    $brands = $_POST['brands'] ?? [];
+    $priceRanges = $_POST['priceRange'] ?? [];
+    $stockStatus = $_POST['stockStatus'] ?? [];
 
     $args = array(
         'post_type' => 'product',
@@ -297,54 +298,72 @@ function filter_products_callback()
         'meta_query' => array(),
     );
 
-    $active_taxonomies = [$category, $color, $size, $brand];
+    $active_taxonomies = array_filter([$categories, $subcategories, $colors, $sizes, $brands]);
     if (count($active_taxonomies) > 1) {
         $args['tax_query']['relation'] = 'AND';
     }
 
-    if (!empty($category)) {
+    if (!empty($categories)) {
         $args['tax_query'][] = array(
             'taxonomy' => 'product_cat',
             'field' => 'slug',
-            'terms' => $category,
+            'terms' => $categories,
         );
     }
 
-    if (!empty($color)) {
+    if (!empty($subcategories)) {
+        $args['tax_query'][] = array(
+            'taxonomy' => 'product_cat',
+            'field' => 'slug',
+            'terms' => $subcategories,
+        );
+    }
+
+    if (!empty($colors)) {
         $args['tax_query'][] = array(
             'taxonomy' => 'pa_color',
             'field' => 'slug',
-            'terms' => $color,
+            'terms' => $colors,
         );
     }
 
-    if (!empty($size)) {
+    if (!empty($sizes)) {
         $args['tax_query'][] = array(
             'taxonomy' => 'pa_size',
             'field' => 'slug',
-            'terms' => $size,
+            'terms' => $sizes,
         );
     }
 
-    if (!empty($brand)) {
+    if (!empty($brands)) {
         $args['tax_query'][] = array(
             'taxonomy' => 'product_brand',
             'field' => 'slug',
-            'terms' => $brand,
+            'terms' => $brands,
         );
     }
 
-    if (isset($min_price) || isset($max_price)) {
+    if (!empty($priceRanges)) {
+        $range = explode('-', $priceRanges[0]);
         $args['meta_query'][] = array(
-        'key' => '_price',
-        'value' => array($min_price, $max_price),
-        'compare' => 'BETWEEN',
-        'type' => 'NUMERIC',
-    );
+            'key' => '_price',
+            'value' => array($range[0], $range[1]),
+            'compare' => 'BETWEEN',
+            'type' => 'NUMERIC'
+        );
     }
 
-    $query = new WP_Query(($args));
+    if (!empty($stockStatus)) {
+    $args['meta_query'][] = array(
+        'key' => '_stock_status',
+        'value' => $stockStatus,
+        'compare' => 'IN'
+    );
+}
 
+    var_dump($stockStatus);
+    $query = new WP_Query(($args));
+    //var_dump($query);
     if ($query->have_posts()) {
         while ($query->have_posts()) {
             $query->the_post();
@@ -382,70 +401,103 @@ add_action('woocommerce_before_shop_loop', 'filter_dropdown', 5); //hook is load
 function filter_dropdown()
 {
     if (is_shop()) {
-        $categories = get_terms(array('taxonomy' => 'product_cat'));
-        $color = get_terms(array('taxonomy' => 'pa_color'));
-        $size = get_terms(array('taxonomy' => 'pa_size'));
-        $brand = get_terms(array('taxonomy' => 'product_brand'));
+        $categories = get_terms(['taxonomy' => 'product_cat', 'parent' => 0]);
+        $subcategories = [];
+        $parent_category = get_term_by('slug', 'clothes', 'product_cat');
+        if ($parent_category) {
+            $parent_id = $parent_category->term_id;
+            $subcategories = get_terms([
+                'taxonomy' => 'product_cat',
+                'parent' => $parent_id
+            ]);
+        }
+        $color = get_terms(array('taxonomy' => 'pa_color', 'hide_empty' => false));
+        $size = get_terms(array('taxonomy' => 'pa_size', 'hide_empty' => false));
+        $brand = get_terms(array('taxonomy' => 'product_brand', 'hide_empty' => false));
 
-        echo '<div style="margin-bottom: 30px;">';
-        echo '<label for="category-filter">Filter by Category: </label>';
-        echo '<select id="category-filter">';
-        echo '<option value="">All Products</option>';
+        echo '<div style="margin-bottom: 5px;">';
+        echo '<label><b>Filter by Category: </b></label><br>';
         if (!empty($categories)) {
             foreach ($categories as $category) {
-                echo '<option value = "' . $category->slug . '">' . $category->name . '</option>';
+        ?>
+                <label>
+                    <input type="checkbox" class="category-filter" value="<?php echo $category->slug; ?>"><?php echo '&nbsp' . $category->name . "<br>"; ?>
+                </label>
+        <?php
             }
         }
-        echo '</select>';
         echo '</div>';
 
-        echo '<div style="margin-bottom: 30px;">';
-        echo '<label for="color-filter">Filter by color: </label>';
-        echo '<select id="color-filter">';
-        echo '<option value="">All Colors</option>';
+        ?>
+        <div id="subcategory-wrapper" style="display:none;">
+            <label><b>Filter by SubCategory: </b></label><br>
+            <?php
+            if (!empty($subcategories)) {
+                foreach ($subcategories as $subcategory) {
+            ?>
+                    <label>
+                        <input type="checkbox"
+                            class="subcategory-filter"
+                            value="<?php echo $subcategory->slug; ?>">
+                        <?php echo $subcategory->name ?>
+                    </label>
+                    <br>
+            <?php
+                }
+            }
+            ?>
+        </div>
+        <?php
+
+        echo '<div id="color-wrapper" style="margin-bottom: 5px;">';
+        echo '<label><b>Filter by Color:</b></label><br>';
         if (!empty($color)) {
             foreach ($color as $colors) {
-                echo '<option value = "' . $colors->slug . '">' . $colors->name . '</option>';
+        ?>
+                <label>
+                    <input type="checkbox" class="color-filter" value="<?php echo $colors->slug; ?>"><?php echo '&nbsp' . $colors->name . "<br>"; ?>
+                </label>
+            <?php
             }
         }
-        echo '</select>';
         echo '</div>';
 
-        echo '<div style="margin-bottom: 30px;">';
-        echo '<label for="size-filter">Filter by size: </label>';
-        echo '<select id="size-filter">';
-        echo '<option value="">All Sizes</option>';
+        echo '<div id="size-wrapper" style="margin-bottom: 5px;">';
+        echo '<label for="size-filter"><b>Filter by Size: </b></label><br>';
         if (!empty($size)) {
             foreach ($size as $sizes) {
-                echo '<option value = "' . $sizes->slug . '">' . $sizes->name . '</option>';
+            ?>
+                <label>
+                    <input type="checkbox" class="size-filter" value="<?php echo $sizes->slug; ?>"><?php echo '&nbsp' . $sizes->name . "<br>"; ?>
+                </label>
+            <?php
             }
         }
-        echo '</select>';
         echo '</div>';
 
-        echo '<div style="margin-bottom: 30px;">';
-        echo '<label for="brand-filter">Filter by Brand: </label>';
-        echo '<select id="brand-filter">';
-        echo '<option value="">All Brands</option>';
+        echo '<div id="brand-wrapper" style="margin-bottom: 5px;">';
+        echo '<label for="brand-filter"><b>Filter by Brand: </b></label><br>';
         if (!empty($brand)) {
             foreach ($brand as $brands) {
-                echo '<option value = "' . $brands->slug . '">' . $brands->name . '</option>';
+            ?>
+                <label>
+                    <input type="checkbox" class="brand-filter" value="<?php echo $brands->slug; ?>"><?php echo '&nbsp' . $brands->name . "<br>"; ?>
+                </label>
+        <?php
             }
         }
-        echo '</select>';
         echo '</div>';
 
-        echo '<div class="price-filter-box" style="margin-bottom: 30px; display: flex; align-items: flex-end; gap: 10px;">';
-        echo '<div>';
-        echo '<label for="min-price" style="display:block;">Min Price ($):</label>';
-        echo '  <input type="number" id="min-price" value="0" min="0" style="width: 80px; padding: 5px;">';
-        echo '</div>';
-        echo '<div>';
-        echo '<label for="max-price" style="display:block;">Max Price ($):</label>';
-        echo '      <input type="number" id="max-price" value="1000" min="0" style="width: 80px; padding: 5px;">';
-        echo '</div>';
-        echo '  <button type="button" id="price-filter" style="padding: 6px 12px; background: #000; color: #fff; border: none; cursor: pointer;">Filter Price</button>';
-        echo '</div>';
+        echo '<b>Filter by Price: </b><br>';
+        ?>
+        <input type="checkbox" class="price-filter" value="0-500"> ₹0 - ₹500 <br>
+        <input type="checkbox" class="price-filter" value="500-1000"> ₹500 - ₹1000 <br>
+        <input type="checkbox" class="price-filter" value="1000-100000"> ₹1000 - ₹100000<br>
+        <?php
+
+        echo '<b>Stock Status</b><br>';
+        echo '<label><input type="checkbox" class="stock-filter" value="instock"> In Stock</label><br>';
+        echo '<label><input type="checkbox" class="stock-filter" value="outofstock"> Out Of Stock</label><br>';
     }
 }
 
@@ -453,7 +505,7 @@ add_action('woocommerce_before_shop_loop', 'ajax_container_open', 12);
 function ajax_container_open()
 {
     if (is_shop()) {
-        echo '<div id="products-container" class="products columns-5 ">';
+        echo '<div id="products-container" class="products columns-4">';
     }
 }
 
