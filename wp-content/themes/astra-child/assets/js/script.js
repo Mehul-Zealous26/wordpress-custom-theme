@@ -20,7 +20,7 @@ jQuery(document).ready(function ($) {
     productFilter();
 });
 
-    $(document).on('change', '.category-filter, .subcategory-filter, .color-filter, .size-filter, .brand-filter, stock-filter', function () {
+    $(document).on('change', '.category-filter, .subcategory-filter, .color-filter, .size-filter, .brand-filter, .stock-filter, .sort-filter', function () {
         productFilter();
     }
 );
@@ -36,7 +36,9 @@ jQuery(document).ready(function ($) {
     let sizes = [];
     let brands = [];
     let priceRange = [];
-    let stockStatus = [];
+    let stockStatus = [];   
+    
+    let sort_by = $('.sort-filter:checked').val();
 
     $('.category-filter:checked').each(function () {
         categories.push($(this).val());
@@ -63,7 +65,7 @@ jQuery(document).ready(function ($) {
     });
 
     $('.stock-filter:checked').each(function(){
-    stockStatus.push($(this).val());
+        stockStatus.push($(this).val());
     });
 
     //console.log(priceRange);
@@ -79,6 +81,7 @@ jQuery(document).ready(function ($) {
             brands: brands,
             priceRange: priceRange,
             stockStatus: stockStatus,
+            sort_by: sort_by,
         },
         success: function (response) {
             $('#products-container').html(response);

@@ -82,6 +82,11 @@ ul .products {
 }
 
 #size-wrapper,
-#color-wrapper{
+#color-wrapper{ 
   display: none;
+}
+
+#products-container{
+  display: flex !important; 
+  flex-wrap: wrap !important;
 }

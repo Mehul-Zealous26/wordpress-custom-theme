@@ -290,6 +290,7 @@ function filter_products_callback()
     $brands = $_POST['brands'] ?? [];
     $priceRanges = $_POST['priceRange'] ?? [];
     $stockStatus = $_POST['stockStatus'] ?? [];
+    $sort_by = $_POST['sort_by'] ?? [];
 
     $args = array(
         'post_type' => 'product',
@@ -300,7 +301,7 @@ function filter_products_callback()
 
     $active_taxonomies = array_filter([$categories, $subcategories, $colors, $sizes, $brands]);
     if (count($active_taxonomies) > 1) {
-        $args['tax_query']['relation'] = 'AND';
+        $args['tax_query']['relation'] = 'AND'; 
     }
 
     if (!empty($categories)) {
@@ -344,26 +345,46 @@ function filter_products_callback()
     }
 
     if (!empty($priceRanges)) {
-        $range = explode('-', $priceRanges[0]);
+    $price_query = array('relation' => 'OR');
+
+    foreach ($priceRanges as $singleRange) {
+        $range = explode('-', $singleRange);
+        var_dump($priceRanges);
+        var_dump($range[0], $range[1]);
+        if (isset($range[0], $range[1])) {
+            $price_query[] = array(
+                'key' => '_price',
+                'value' => array($range[0], $range[1]),
+                'compare' => 'BETWEEN',
+                'type' => 'NUMERIC'
+            );
+        }
+    }
+    $args['meta_query'][] = $price_query;
+}
+
+    if (!empty($stockStatus)) {
         $args['meta_query'][] = array(
-            'key' => '_price',
-            'value' => array($range[0], $range[1]),
-            'compare' => 'BETWEEN',
-            'type' => 'NUMERIC'
+            'key' => '_stock_status',
+            'value' => $stockStatus,
+            'compare' => 'IN'
         );
     }
 
-    if (!empty($stockStatus)) {
-    $args['meta_query'][] = array(
-        'key' => '_stock_status',
-        'value' => $stockStatus,
-        'compare' => 'IN'
-    );
-}
+    if (!empty('sort_by')) {
+        if ($sort_by === 'price-asc') {
+            $args['orderby'] = 'meta_value_num';
+            $args['meta_key'] = '_price';
+            $args['order'] = 'ASC';
+        } elseif ($sort_by === 'price-desc') {
+            $args['orderby'] = 'meta_value_num';
+            $args['meta_key'] = '_price';
+            $args['order'] = 'DESC';
+        }
+    }
 
-    var_dump($stockStatus);
+    // var_dump($stockStatus);
     $query = new WP_Query(($args));
-    //var_dump($query);
     if ($query->have_posts()) {
         while ($query->have_posts()) {
             $query->the_post();
@@ -398,6 +419,7 @@ function custom_filter_scripts()
 }
 
 add_action('woocommerce_before_shop_loop', 'filter_dropdown', 5); //hook is load filter Dropdown before Product loop
+
 function filter_dropdown()
 {
     if (is_shop()) {
@@ -436,12 +458,8 @@ function filter_dropdown()
                 foreach ($subcategories as $subcategory) {
             ?>
                     <label>
-                        <input type="checkbox"
-                            class="subcategory-filter"
-                            value="<?php echo $subcategory->slug; ?>">
-                        <?php echo $subcategory->name ?>
-                    </label>
-                    <br>
+                        <input type="checkbox" class="subcategory-filter" value="<?php echo $subcategory->slug; ?>"> <?php echo $subcategory->name ?>
+                    </label><br>
             <?php
                 }
             }
@@ -488,16 +506,23 @@ function filter_dropdown()
         }
         echo '</div>';
 
-        echo '<b>Filter by Price: </b><br>';
+        echo '<label><b>Filter by Price: </b></label><br>';
         ?>
-        <input type="checkbox" class="price-filter" value="0-500"> ₹0 - ₹500 <br>
-        <input type="checkbox" class="price-filter" value="500-1000"> ₹500 - ₹1000 <br>
-        <input type="checkbox" class="price-filter" value="1000-100000"> ₹1000 - ₹100000<br>
+        <input type="checkbox" name="price_ranges[]" class="price-filter" value="0-500"> ₹0 - ₹500 <br>
+        <input type="checkbox" name="price_ranges[]" class="price-filter" value="500-1000"> ₹500 - ₹1000 <br>
+        <input type="checkbox" name="price_ranges[]" class="price-filter" value="1000-100000"> ₹1000 - ₹100000<br>
         <?php
 
-        echo '<b>Stock Status</b><br>';
-        echo '<label><input type="checkbox" class="stock-filter" value="instock"> In Stock</label><br>';
-        echo '<label><input type="checkbox" class="stock-filter" value="outofstock"> Out Of Stock</label><br>';
+        echo '<label><b>Stock Status</b></label><br>';
+        echo '<label><input type="checkbox" name="stock_status[]"  class="stock-filter" value="instock"> In Stock</label><br>';
+        echo '<label><input type="checkbox" name="stock_status[]"  class="stock-filter" value="outofstock"> Out Of Stock</label><br>';
+
+        echo '<div id="sort-wrapper" style="margin-bottom: 5px;">';
+        echo '<label><b>Sort By Price: </b></label><br>';
+        echo '<label><input type="radio" name="sort_by" class="sort-filter" value="default" checked> Default Sorting</label><br>';
+        echo '<label><input type="radio" name="sort_by" class="sort-filter" value="price-asc"> Low to High</label><br>';
+        echo '<label><input type="radio" name="sort_by" class="sort-filter" value="price-desc"> High to Low</label><br>';
+        echo '</div>';
     }
 }
 
