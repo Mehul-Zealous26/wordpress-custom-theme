@@ -1,6 +1,7 @@
 <?php
 /*
 Template Name: Page Builder
+Template Post Type: page, projects
 */
 get_header();
 ?>
