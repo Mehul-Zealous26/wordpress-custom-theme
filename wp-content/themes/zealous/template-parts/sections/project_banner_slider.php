@@ -22,10 +22,9 @@
                                 <div class="">
                                     <div class="project-banner-cont">
                                         <h2><?php echo $project_title; ?></h2>
-
                                     </div>
                                     <div class="project-banner-info">
-                                        <label for=""><?php echo $client_name; ?></label>
+                                        <label for="client"><?php echo $client_name; ?></label>   
                                         <span><?php echo $location; ?></span>
                                     </div>
                                 </div>
